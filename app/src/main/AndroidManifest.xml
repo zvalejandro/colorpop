@@ -12,10 +12,15 @@
         <activity android:name=".presenter.activities.ActivityHome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presenter.activities.ActivityDetail"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

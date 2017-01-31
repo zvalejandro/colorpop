@@ -1,5 +1,6 @@
 package com.zaraos.colorpop.presenter.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
 
+import com.zaraos.colorpop.presenter.activities.ActivityDetail;
 import com.zaraos.colorpop.presenter.utils.ColorPopUtils;
 import com.zaraos.colorpop.presenter.utils.BundleInformerUtils;
 import com.zaraos.colorpop.presenter.utils.ColorUtils;
@@ -72,6 +74,8 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /*
                 FragmentDoc fragment = FragmentDoc.newInstance(null);
                 boolean isViewBehindStatusBar = false;
                 if (android.os.Build.VERSION.SDK_INT >= 19)
@@ -88,6 +92,11 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
                         .addToBackStack(null)
                         .add(android.R.id.content, fragment)
                         .commit();
+                        */
+
+
+                getActivity().startActivity(new Intent(getActivity(), ActivityDetail.class));
+
             }
         };
     }
