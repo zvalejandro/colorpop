@@ -1,6 +1,7 @@
 package com.zaraos.colorpop.presenter.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -99,6 +100,12 @@ public class BundleInformerUtils {
         return this;
     }
 
+    public BundleInformerUtils informActivity(Intent intent) {
+        intent.putExtra(START_POINT_X_KEY, start_point_x);
+        intent.putExtra(START_POINT_Y_KEY, start_point_y);
+        return this;
+    }
+
     /**
      * @param fragment it will give the fragment these informations </br> #1 Int |
      *                 the circles color </br> #2 Int | start point of the animation
@@ -109,6 +116,13 @@ public class BundleInformerUtils {
         arguments.putInt(START_POINT_X_KEY, start_point_x);
         arguments.putInt(START_POINT_Y_KEY, start_point_y);
         fragment.setArguments(arguments);
+        return this;
+    }
+
+    public BundleInformerUtils informColorPopIntent(Intent intent) {
+        intent.putExtra(CIRCLE_COLOR_KEY, circle_color);
+        intent.putExtra(START_POINT_X_KEY, start_point_x);
+        intent.putExtra(START_POINT_Y_KEY, start_point_y);
         return this;
     }
 
@@ -128,6 +142,16 @@ public class BundleInformerUtils {
         arguments.putBoolean(IS_VIEWS_BEHIND_STATUS_BAR, is_behind_statusbar);
         arguments.putInt(STATUSBAR_HEIGHT, statusbar_height);
         fragment.setArguments(arguments);
+        return this;
+    }
+
+    public BundleInformerUtils informColorPopPageActivity(Intent intent) {
+        intent.putExtra(CIRCLE_COLOR_KEY, circle_color);
+        intent.putExtra(RECT_COLOR_KEY, page_color);
+        intent.putExtra(START_POINT_X_KEY, start_point_x);
+        intent.putExtra(START_POINT_Y_KEY, start_point_y);
+        intent.putExtra(IS_VIEWS_BEHIND_STATUS_BAR, is_behind_statusbar);
+        intent.putExtra(STATUSBAR_HEIGHT, statusbar_height);
         return this;
     }
 

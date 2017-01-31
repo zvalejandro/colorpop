@@ -28,8 +28,8 @@ public class ActivityDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_toolbar);
-        initToolbar();
+        //setContentView(R.layout.main_toolbar);
+        //initToolbar();
         initFragment();
     }
 
@@ -41,10 +41,8 @@ public class ActivityDetail extends AppCompatActivity {
     }
 
     private void initFragment() {
-        toolbar.setHomeIndicatorBack("Detalle");
-        toolbar.hideElevation();
-
-        ImageView img = (ImageView) findViewById(R.id.toolbar_elevation);
+        //toolbar.setHomeIndicatorBack("Detalle");
+        //toolbar.hideElevation();
 
         /*
         getSupportFragmentManager()
@@ -54,6 +52,7 @@ public class ActivityDetail extends AppCompatActivity {
                 .commit();
 */
 
+        /*
         FragmentDetail fragment = FragmentDetail.newInstance();
         boolean isViewBehindStatusBar = false;
         if (android.os.Build.VERSION.SDK_INT >= 19)
@@ -64,11 +63,12 @@ public class ActivityDetail extends AppCompatActivity {
                 .setPageColor(Color.WHITE)
                 .setBaseView(img, BundleInformerUtils.MODE_CENTER, isViewBehindStatusBar)
                 .informColorPopPageFragment(fragment);
+                */
 
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)
-                .addToBackStack(null)
-                .add(android.R.id.content, fragment)
+                //.addToBackStack(null)
+                .replace(android.R.id.content, FragmentDetail.newInstance(getIntent().getExtras()))
                 .commit();
     }
 

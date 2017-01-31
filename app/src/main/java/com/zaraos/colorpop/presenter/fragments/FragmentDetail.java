@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,50 +14,79 @@ import android.view.animation.AnimationUtils;
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.model.abstracts.ColorPopFragment;
 import com.zaraos.colorpop.model.abstracts.ColorPopPageFragment;
+import com.zaraos.colorpop.presenter.utils.ColorPopUtils;
+import com.zaraos.colorpop.presenter.utils.ColorUtils;
+import com.zaraos.colorpop.view.adapters.ListItemAdapter;
 
 /**
  * Created by Alex on 31/01/17.
  */
 
-public class FragmentDetail extends ColorPopPageFragment {
+public class FragmentDetail extends ColorPopFragment {
 
-    public static FragmentDetail newInstance() {
+    public static FragmentDetail newInstance(Bundle args) {
         FragmentDetail fragmentEmbargo = new FragmentDetail();
-        fragmentEmbargo.setArguments(null);
+        fragmentEmbargo.setArguments(args);
         fragmentEmbargo.setHasOptionsMenu(true);
         return fragmentEmbargo;
     }
 
     private View rootView;
+    private Toolbar toolbar;
+    private View content;
 
     @Override
     public View onCreateFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+        if (android.os.Build.VERSION.SDK_INT >= 19) {
+            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(getContext()), 0, 0);
+        }
+
+        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        content = rootView.findViewById(R.id.detail_view_content);
         return rootView;
     }
 
     @Override
     public void onBackgroundAnimationEnd() {
+        rootView.setVisibility(View.VISIBLE);
+        toolbar.setVisibility(View.INVISIBLE);
         Context context = getContext();
         if (context != null) {
-            Animation fade_in = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-            rootView.startAnimation(fade_in);
-            rootView.setVisibility(View.VISIBLE);
+            Animation grow = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_bottom);
+            grow.setAnimationListener(onAnimationListener());
+            content.startAnimation(grow);
+            content.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        toolbar.setTitle("AndroidColorPop");
     }
 
-    @Override
-    public boolean haveHeader() {
-        return false;
-    }
+    private Animation.AnimationListener onAnimationListener(){
+        return new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
 
-    @Override
-    public View getHeaderView(View fragmentView) {
-        return null;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Context context = getContext();
+                if (context != null) {
+                    Animation fade_in = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+                    toolbar.startAnimation(fade_in);
+                    toolbar.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        };
     }
 }

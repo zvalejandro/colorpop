@@ -6,7 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" />
+
     <LinearLayout
+        android:background="@color/app_white"
+        android:id="@+id/detail_view_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -20,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textStyle="normal|bold"
+            android:textColor="@color/black"
             android:text="detail fragment"
             tools:text="type" />
 

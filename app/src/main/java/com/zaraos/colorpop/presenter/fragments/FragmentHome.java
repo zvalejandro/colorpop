@@ -95,7 +95,19 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
                         */
 
 
-                getActivity().startActivity(new Intent(getActivity(), ActivityDetail.class));
+                
+                boolean isViewBehindStatusBar = false;
+                if (android.os.Build.VERSION.SDK_INT >= 19)
+                    isViewBehindStatusBar = true;
+
+                Intent intent = new Intent(getActivity(), ActivityDetail.class);
+                BundleInformerUtils.init(getActivity())
+                        .setCircleColor(ColorUtils.get(R.color.blue_grey_800))
+                        //.setPageColor(Color.WHITE)
+                        .setBaseView(v, BundleInformerUtils.MODE_CENTER, isViewBehindStatusBar)
+                        .informColorPopPageActivity(intent);
+
+                getActivity().startActivity(intent);
 
             }
         };
