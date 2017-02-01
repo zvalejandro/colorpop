@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,11 @@ import android.view.animation.AnimationUtils;
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.model.abstracts.ColorPopFragment;
 import com.zaraos.colorpop.model.abstracts.ColorPopPageFragment;
+import com.zaraos.colorpop.presenter.activities.ActivityDetail;
 import com.zaraos.colorpop.presenter.utils.ColorPopUtils;
 import com.zaraos.colorpop.presenter.utils.ColorUtils;
 import com.zaraos.colorpop.view.adapters.ListItemAdapter;
+import com.zaraos.colorpop.view.utilsview.ToolbarUtilsView;
 
 /**
  * Created by Alex on 31/01/17.
@@ -32,7 +35,8 @@ public class FragmentDetail extends ColorPopFragment {
     }
 
     private View rootView;
-    private Toolbar toolbar;
+    //private Toolbar toolbar;
+    private ToolbarUtilsView toolbar;
     private View content;
 
     @Override
@@ -42,7 +46,8 @@ public class FragmentDetail extends ColorPopFragment {
             rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(getContext()), 0, 0);
         }
 
-        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        toolbar = new ToolbarUtilsView();
+        toolbar.with((AppCompatActivity) getActivity(), rootView);
         content = rootView.findViewById(R.id.detail_view_content);
         return rootView;
     }
@@ -51,6 +56,7 @@ public class FragmentDetail extends ColorPopFragment {
     public void onBackgroundAnimationEnd() {
         rootView.setVisibility(View.VISIBLE);
         toolbar.setVisibility(View.INVISIBLE);
+
         Context context = getContext();
         if (context != null) {
             Animation grow = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_bottom);
@@ -63,10 +69,11 @@ public class FragmentDetail extends ColorPopFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar.setTitle("AndroidColorPop");
+        toolbar.setHomeIndicatorBack("AndroidColorPop");
+        toolbar.hideElevation();
     }
 
-    private Animation.AnimationListener onAnimationListener(){
+    private Animation.AnimationListener onAnimationListener() {
         return new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -78,8 +85,7 @@ public class FragmentDetail extends ColorPopFragment {
                 Context context = getContext();
                 if (context != null) {
                     Animation fade_in = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-                    toolbar.startAnimation(fade_in);
-                    toolbar.setVisibility(View.VISIBLE);
+                    toolbar.setVisibility(fade_in, View.VISIBLE);
                 }
             }
 

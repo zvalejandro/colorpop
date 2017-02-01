@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -38,12 +39,15 @@ public class ActivityDetail extends AppCompatActivity {
     private void initToolbar() {
         toolbar = new ToolbarUtilsView();
         toolbar.with(this);
+        toolbar.setHomeIndicatorBack("Detalle");
+        toolbar.hideElevation();
+    }
+
+    public ToolbarUtilsView getToolbar(){
+        return toolbar;
     }
 
     private void initFragment() {
-        //toolbar.setHomeIndicatorBack("Detalle");
-        //toolbar.hideElevation();
-
         /*
         getSupportFragmentManager()
                 .beginTransaction()
@@ -68,7 +72,7 @@ public class ActivityDetail extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)
                 //.addToBackStack(null)
-                .replace(android.R.id.content, FragmentDetail.newInstance(getIntent().getExtras()))
+                .replace(R.id.container, FragmentDetail.newInstance(getIntent().getExtras()))
                 .commit();
     }
 
