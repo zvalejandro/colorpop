@@ -6,12 +6,19 @@
     app:elevation="0dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
+    android:background="@android:color/white"
     android:fitsSystemWindows="true">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:theme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
+
+    <ImageView
+        android:id="@+id/toolbar_elevation"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@drawable/gradient_elevation"
+        />
 </android.support.design.widget.AppBarLayout>

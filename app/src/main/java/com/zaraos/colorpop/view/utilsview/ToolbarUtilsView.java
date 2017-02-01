@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -114,6 +115,9 @@ public class ToolbarUtilsView {
     public void setVisibility(Animation animation, int visibility) {
         getToolbar().startAnimation(animation);
         getToolbar().setVisibility(visibility);
+        getImageElevation().setVisibility(View.VISIBLE);
+
+       
     }
 
     private int getColor(int id) {
@@ -121,11 +125,11 @@ public class ToolbarUtilsView {
     }
 
     public void setHomeIndicatorBack(String title) {
-        setHomeIndicator(title, R.mipmap.ico_toolbar_back_white);
+        setHomeIndicator(title, R.mipmap.ico_toolbar_back_black);
     }
 
     public void setHomeIndicatorClose(String title) {
-        setHomeIndicator(title, R.mipmap.ico_toolbar_back_white);
+        setHomeIndicator(title, R.mipmap.ico_toolbar_back_black);
     }
 
     public void setStatusBarColor(@ColorRes int idColor) {

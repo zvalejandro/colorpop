@@ -69,14 +69,13 @@ public class FragmentDetail extends ColorPopFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         toolbar.setHomeIndicatorBack("AndroidColorPop");
-        toolbar.hideElevation();
+        //toolbar.hideElevation();
     }
 
     private Animation.AnimationListener onAnimationListener() {
         return new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
 
             @Override
@@ -90,7 +89,6 @@ public class FragmentDetail extends ColorPopFragment {
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         };
     }

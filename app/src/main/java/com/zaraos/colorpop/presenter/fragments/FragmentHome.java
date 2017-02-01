@@ -74,27 +74,6 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*
-                FragmentDoc fragment = FragmentDoc.newInstance(null);
-                boolean isViewBehindStatusBar = false;
-                if (android.os.Build.VERSION.SDK_INT >= 19)
-                    isViewBehindStatusBar = true;
-
-                BundleInformerUtils.init(getActivity())
-                        .setCircleColor(ColorUtils.get(R.color.blue_grey_800))
-                        .setPageColor(Color.WHITE)
-                        .setBaseView(v, BundleInformerUtils.MODE_CENTER, isViewBehindStatusBar)
-                        .informColorPopPageFragment(fragment);
-
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)
-                        .addToBackStack(null)
-                        .add(android.R.id.content, fragment)
-                        .commit();
-                        */
-
-
                 
                 boolean isViewBehindStatusBar = false;
                 if (android.os.Build.VERSION.SDK_INT >= 19)
@@ -102,7 +81,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
 
                 Intent intent = new Intent(getActivity(), ActivityDetail.class);
                 BundleInformerUtils.init(getActivity())
-                        .setCircleColor(ColorUtils.get(R.color.blue_grey_800))
+                        .setCircleColor(ColorUtils.get(R.color.base_gray))
                         //.setPageColor(Color.WHITE)
                         .setBaseView(v, BundleInformerUtils.MODE_CENTER, isViewBehindStatusBar)
                         .informColorPopPageActivity(intent);
