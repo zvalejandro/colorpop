@@ -81,7 +81,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
 
                 Intent intent = new Intent(getActivity(), ActivityDetail.class);
                 BundleInformerUtils.init(getActivity())
-                        .setCircleColor(ColorUtils.get(R.color.base_gray))
+                        .setCircleColor(ColorUtils.get(R.color.white))
                         //.setPageColor(Color.WHITE)
                         .setBaseView(v, BundleInformerUtils.MODE_CENTER, isViewBehindStatusBar)
                         .informColorPopPageActivity(intent);

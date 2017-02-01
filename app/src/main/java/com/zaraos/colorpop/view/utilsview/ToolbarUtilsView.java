@@ -17,6 +17,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.zaraos.colorpop.R;
+import com.zaraos.colorpop.presenter.utils.ConvertUtils;
 
 /**
  * Created by Alex on 31/01/17.
@@ -115,9 +116,17 @@ public class ToolbarUtilsView {
     public void setVisibility(Animation animation, int visibility) {
         getToolbar().startAnimation(animation);
         getToolbar().setVisibility(visibility);
-        getImageElevation().setVisibility(View.VISIBLE);
+        getImageElevation().startAnimation(animation);
+        getImageElevation().setVisibility(visibility);
+        /*
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getImageElevation().setVisibility(View.VISIBLE);
+        } else {
+            getImageElevation().getLayoutParams().height = ConvertUtils.dpToPx(6);
+            getImageElevation().requestLayout();
+            getImageElevation().setVisibility(View.VISIBLE);
 
-       
+        }*/
     }
 
     private int getColor(int id) {

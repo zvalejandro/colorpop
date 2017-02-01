@@ -31,74 +31,88 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/detail_view_content"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/app_white"
-                    android:orientation="vertical"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="15dp">
+                    android:layout_height="match_parent">
 
-                    <Button
-                        android:text="Button"
+                    <LinearLayout
+                        android:id="@+id/detail_view_content"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/button3" />
+                        android:layout_height="match_parent"
+                        android:background="@color/app_white"
+                        android:orientation="vertical"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="15dp">
 
-                    <TextView
-                        android:text="TextView"
+                        <Button
+                            android:text="Button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/button3" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView2" />
+
+                        <CheckBox
+                            android:text="CheckBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/checkBox" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:ems="10"
+                            android:id="@+id/editText" />
+
+                        <Button
+                            android:text="Button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/button2" />
+
+                        <Switch
+                            android:text="Switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/switch1" />
+
+                        <RadioButton
+                            android:text="RadioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton" />
+
+                        <Button
+                            android:text="Button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/button" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TextView"
+                            android:textColor="@color/black"
+                            tools:text="especificación multa"/>
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/toolbar_elevation"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView2" />
-
-                    <CheckBox
-                        android:text="CheckBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/checkBox" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:ems="10"
-                        android:id="@+id/editText" />
-
-                    <Button
-                        android:text="Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/button2" />
-
-                    <Switch
-                        android:text="Switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/switch1" />
-
-                    <RadioButton
-                        android:text="RadioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/radioButton" />
-
-                    <Button
-                        android:text="Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/button" />
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textColor="@color/black"
-                        tools:text="especificación multa"/>
-
-                </LinearLayout>
+                        android:layout_height="6dp"
+                        android:background="@color/white"
+                        android:src="@drawable/gradient_elevation"
+                        android:visibility="invisible"/>
+                </FrameLayout>
             </android.support.design.widget.CoordinatorLayout>
 
         </LinearLayout>
