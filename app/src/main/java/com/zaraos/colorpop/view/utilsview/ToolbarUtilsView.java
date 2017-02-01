@@ -30,7 +30,7 @@ public class ToolbarUtilsView {
     private ActionBarDrawerToggle toggle;
     private AppBarLayout appBarLayout;
 
-    private AppBarLayout getAppBarLayout() {
+    public AppBarLayout getAppBarLayout() {
         if (appBarLayout == null)
             appBarLayout = (AppBarLayout) rootView.findViewById(R.id.appbarlayout);
         return appBarLayout;

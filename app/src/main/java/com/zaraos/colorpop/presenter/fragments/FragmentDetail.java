@@ -35,7 +35,6 @@ public class FragmentDetail extends ColorPopFragment {
     }
 
     private View rootView;
-    //private Toolbar toolbar;
     private ToolbarUtilsView toolbar;
     private View content;
 
