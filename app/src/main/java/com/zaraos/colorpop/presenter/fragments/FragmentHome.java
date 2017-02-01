@@ -1,7 +1,6 @@
 package com.zaraos.colorpop.presenter.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,9 +12,10 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
 
+import com.zaraos.colorpop.model.constants.POPAPI;
 import com.zaraos.colorpop.presenter.activities.ActivityDetail;
+import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
 import com.zaraos.colorpop.presenter.utils.ColorPopUtils;
-import com.zaraos.colorpop.presenter.utils.BundleInformerUtils;
 import com.zaraos.colorpop.presenter.utils.ColorUtils;
 import com.zaraos.colorpop.view.adapters.GridItemAdapter;
 import com.zaraos.colorpop.R;
@@ -80,10 +80,10 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
                     isViewBehindStatusBar = true;
 
                 Intent intent = new Intent(getActivity(), ActivityDetail.class);
-                BundleInformerUtils.init(getActivity())
+                BundlePopUtils.Builder.init(getActivity())
                         .setCircleColor(ColorUtils.get(R.color.white))
                         //.setPageColor(Color.WHITE)
-                        .setBaseView(v, BundleInformerUtils.MODE_CENTER, isViewBehindStatusBar)
+                        .setBaseView(v, POPAPI.POP_MODE_CENTER, isViewBehindStatusBar)
                         .informColorPopPageActivity(intent);
 
                 getActivity().startActivity(intent);
@@ -97,8 +97,8 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         FragmentCover fragment = FragmentCover.newInstance(null);
         View toolbarView = toolbar.findViewById(arg0.getItemId());
 
-        BundleInformerUtils.init(getActivity())
-                .setBaseView(toolbarView, BundleInformerUtils.MODE_CENTER, false)
+        BundlePopUtils.Builder.init(getActivity())
+                .setBaseView(toolbarView, POPAPI.POP_MODE_CENTER, false)
                 .informFragment(fragment);
 
         getActivity().getSupportFragmentManager().beginTransaction()

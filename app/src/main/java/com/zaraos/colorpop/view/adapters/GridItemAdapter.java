@@ -1,9 +1,7 @@
 package com.zaraos.colorpop.view.adapters;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,10 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zaraos.colorpop.presenter.utils.BundleInformerUtils;
+import com.zaraos.colorpop.model.constants.POPAPI;
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.presenter.fragments.FragmentList;
-import com.zaraos.colorpop.presenter.utils.ColorUtils;
+import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
 
 /**
  * Created by Alex on 26/01/17.
@@ -88,9 +86,9 @@ public class GridItemAdapter extends BaseAdapter {
                     isViewBehindStatusBar = true;
 
                 FragmentList fragment = FragmentList.newInstance(null);
-                BundleInformerUtils.init(fragment_activity)
+                BundlePopUtils.Builder.init(fragment_activity)
                         .setCircleColor(item_color)
-                        .setBaseView(holder.cirlce, BundleInformerUtils.MODE_CENTER, isViewBehindStatusBar)
+                        .setBaseView(holder.cirlce, POPAPI.POP_MODE_CENTER, isViewBehindStatusBar)
                         .informColorPopPageFragment(fragment);
 
                 fragment_activity.getSupportFragmentManager().beginTransaction()

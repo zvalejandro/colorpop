@@ -118,15 +118,6 @@ public class ToolbarUtilsView {
         getToolbar().setVisibility(visibility);
         getImageElevation().startAnimation(animation);
         getImageElevation().setVisibility(visibility);
-        /*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getImageElevation().setVisibility(View.VISIBLE);
-        } else {
-            getImageElevation().getLayoutParams().height = ConvertUtils.dpToPx(6);
-            getImageElevation().requestLayout();
-            getImageElevation().setVisibility(View.VISIBLE);
-
-        }*/
     }
 
     private int getColor(int id) {

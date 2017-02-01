@@ -2,10 +2,7 @@ package com.zaraos.colorpop.presenter.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +11,7 @@ import android.view.animation.AnimationUtils;
 
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.model.abstracts.ColorPopFragment;
-import com.zaraos.colorpop.model.abstracts.ColorPopPageFragment;
-import com.zaraos.colorpop.presenter.activities.ActivityDetail;
 import com.zaraos.colorpop.presenter.utils.ColorPopUtils;
-import com.zaraos.colorpop.presenter.utils.ColorUtils;
-import com.zaraos.colorpop.view.adapters.ListItemAdapter;
 import com.zaraos.colorpop.view.utilsview.ToolbarUtilsView;
 
 /**
@@ -68,8 +61,7 @@ public class FragmentDetail extends ColorPopFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar.setHomeIndicatorBack("AndroidColorPop");
-        //toolbar.hideElevation();
+        toolbar.setHomeIndicatorBack("Detalle");
     }
 
     private Animation.AnimationListener onAnimationListener() {
