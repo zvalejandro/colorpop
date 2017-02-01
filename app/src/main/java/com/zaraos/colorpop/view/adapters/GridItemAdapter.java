@@ -2,7 +2,6 @@ package com.zaraos.colorpop.view.adapters;
 
 import android.content.res.Resources;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,9 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zaraos.colorpop.presenter.utils.BundleInformerUtils;
+import com.zaraos.colorpop.model.constants.POPAPI;
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.presenter.fragments.FragmentList;
+import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
 
 /**
  * Created by Alex on 26/01/17.
@@ -79,27 +79,23 @@ public class GridItemAdapter extends BaseAdapter {
             holder.cirlce.setImageResource(R.drawable.white_circle);
         }
         convertView.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                BundleInformerUtils informer = new BundleInformerUtils(
-                        fragment_activity);
-                informer.setCircleColor(item_color);
-                boolean is_views_behind_status_bar = false;
-                if (android.os.Build.VERSION.SDK_INT >= 19) {
-                    is_views_behind_status_bar = true;
-                }
-                informer.setBaseView(holder.cirlce,
-                        BundleInformerUtils.MODE_CENTER, is_views_behind_status_bar);
+                boolean isViewBehindStatusBar = false;
+                if (android.os.Build.VERSION.SDK_INT >= 19)
+                    isViewBehindStatusBar = true;
+
                 FragmentList fragment = FragmentList.newInstance(null);
-                informer.informColorPopFragment(fragment);
-                FragmentTransaction transaction = fragment_activity
-                        .getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(0, R.anim.abc_popup_exit, 0,
-                        R.anim.abc_popup_exit);
-                transaction.addToBackStack(null);
-                transaction.add(android.R.id.content, fragment);
-                transaction.commit();
+                BundlePopUtils.Builder.init(fragment_activity)
+                        .setCircleColor(item_color)
+                        .setBaseView(holder.cirlce, POPAPI.POP_MODE_CENTER, isViewBehindStatusBar)
+                        .informColorPopPageFragment(fragment);
+
+                fragment_activity.getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)
+                        .addToBackStack(null)
+                        .add(android.R.id.content, fragment)
+                        .commit();
             }
         });
         return convertView;

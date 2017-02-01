@@ -17,10 +17,10 @@ import com.zaraos.colorpop.view.widgets.PopBackgroundView;
 
 public abstract class ColorPopFragment extends Fragment implements PopBackgroundView.AnimationListener {
 
-    protected boolean should_animate = true;
+    protected boolean shouldAnimate = true;
     protected FrameLayout container;
     protected PopBackgroundView popView;
-    private int circle_color;
+    private int circleColor;
     protected View rootPopView;
 
     public ColorPopFragment() {
@@ -48,11 +48,11 @@ public abstract class ColorPopFragment extends Fragment implements PopBackground
         if (savedInstanceState == null) {
             Bundle arguments = getArguments();
             BundlePopUtils args = new BundlePopUtils(arguments);
-            circle_color = args.getCircleColor();
-            popView.setCircleColor(circle_color);
+            circleColor = args.getCircleColor();
+            popView.setCircleColor(circleColor);
             popView.setCircleStartPointCoordinates(
                     args.getStartPointX(), args.getStartPointY());
-            if (should_animate) {
+            if (shouldAnimate) {
                 popView.setAnimationListener(this);
                 popView.animatePop();
             }
@@ -60,15 +60,13 @@ public abstract class ColorPopFragment extends Fragment implements PopBackground
     }
 
     /**
-     *
      * @return the circles animation colorF color
      */
     public int getCircleColor() {
-        return circle_color;
+        return circleColor;
     }
 
     /**
-     *
      * @return returns the {@link PopBackgroundView} used for aniamtions
      */
     public PopBackgroundView getPopBackgroundView() {

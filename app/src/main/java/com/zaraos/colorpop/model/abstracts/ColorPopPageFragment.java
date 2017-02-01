@@ -14,12 +14,12 @@ import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
 
 public abstract class ColorPopPageFragment extends ColorPopFragment {
 
-    private boolean is_behind_statusbar = false;
-    private int statusbar_height = 0;
-    protected int header_height = 0;
+    private boolean isBehindStatusBar = false;
+    private int statusBarHeight = 0;
+    protected int headerHeight = 0;
 
     public ColorPopPageFragment() {
-        should_animate = false;
+        shouldAnimate = false;
     }
 
     @Override
@@ -31,8 +31,8 @@ public abstract class ColorPopPageFragment extends ColorPopFragment {
             BundlePopUtils info_parser = new BundlePopUtils(
                     arguments);
             popView.setRectColor(info_parser.getPageColor());
-            is_behind_statusbar = info_parser.getIsBehindStatusbar();
-            statusbar_height = info_parser.getStatusBarHeight();
+            isBehindStatusBar = info_parser.getIsBehindStatusbar();
+            statusBarHeight = info_parser.getStatusBarHeight();
             popView.setAnimationListener(this);
             // use a OnGlobalLayoutListener to measure the header view's
             // location and height
@@ -55,22 +55,22 @@ public abstract class ColorPopPageFragment extends ColorPopFragment {
                                                 .removeGlobalOnLayoutListener(
                                                         this);
                                     }
-                                    int[] layout_location = { 0, 0 };
+                                    int[] layout_location = {0, 0};
                                     headerView
                                             .getLocationOnScreen(layout_location);
-                                    header_height += layout_location[1];
-                                    if (!is_behind_statusbar) {
-                                        header_height -= statusbar_height;
+                                    headerHeight += layout_location[1];
+                                    if (!isBehindStatusBar) {
+                                        headerHeight -= statusBarHeight;
                                     }
-                                    header_height += headerView.getHeight();
+                                    headerHeight += headerView.getHeight();
                                     popView
-                                            .setRectSpaceTop(header_height);
+                                            .setRectSpaceTop(headerHeight);
                                     popView.animatePop();
                                 }
                             });
                 }
             } else {
-                popView.setRectSpaceTop(header_height);
+                popView.setRectSpaceTop(headerHeight);
                 popView.animatePop();
             }
         }
@@ -85,8 +85,7 @@ public abstract class ColorPopPageFragment extends ColorPopFragment {
     /**
      * the header view must be set here
      *
-     * @param fragmentView
-     *            the base view of fragment
+     * @param fragmentView the base view of fragment
      */
     public abstract View getHeaderView(View fragmentView);
 
