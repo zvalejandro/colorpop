@@ -75,7 +75,7 @@ public class FragmentDetail extends ColorPopFragment {
                 Context context = getContext();
                 if (context != null) {
                     Animation fade_in = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
-                    toolbar.setVisibility(fade_in, View.VISIBLE);
+                    //toolbar.setVisibility(fade_in, View.VISIBLE);
                 }
             }
 

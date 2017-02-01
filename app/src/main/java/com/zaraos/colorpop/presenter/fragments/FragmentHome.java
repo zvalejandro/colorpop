@@ -1,6 +1,7 @@
 package com.zaraos.colorpop.presenter.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -38,6 +39,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
     private GridView gridView;
     private FloatingActionButton fab;
     private GridItemAdapter adapter;
+    public static View viewClick;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,17 +76,20 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
+                /*
                 boolean isViewBehindStatusBar = false;
                 if (android.os.Build.VERSION.SDK_INT >= 19)
                     isViewBehindStatusBar = true;
+                    */
 
+                viewClick = v;
                 Intent intent = new Intent(getActivity(), ActivityDetail.class);
-                BundlePopUtils.Builder.init(getActivity())
-                        .setCircleColor(ColorUtils.get(R.color.white))
-                        //.setPageColor(Color.WHITE)
+                /*BundlePopUtils.Builder.init(getActivity())
+                        .setCircleColor(ColorUtils.get(R.color.blue_grey_800))
+                        .setPageColor(Color.WHITE)
                         .setBaseView(v, POPAPI.POP_MODE_CENTER, isViewBehindStatusBar)
-                        .informColorPopPageActivity(intent);
+                        .informColorPopPageActivity(intent);*/
 
                 getActivity().startActivity(intent);
 
