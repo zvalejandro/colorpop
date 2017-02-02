@@ -57,7 +57,7 @@ public class GridItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = layout_inflater.inflate(R.layout.adapter_grid,
+            convertView = layout_inflater.inflate(R.layout.fragment_home_grid,
                     parent, false);
             ViewHolder holder = new ViewHolder();
             holder.cirlce = (ImageView) convertView.findViewById(R.id.circle);
@@ -68,15 +68,15 @@ public class GridItemAdapter extends BaseAdapter {
         final ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.title.setText("Grid Item " + (position + 1));
         if (item_color == app_green_color) {
-            holder.cirlce.setImageResource(R.drawable.green_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_green);
         } else if (item_color == app_blue_color) {
-            holder.cirlce.setImageResource(R.drawable.blue_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_blue);
         } else if (item_color == app_red_color) {
-            holder.cirlce.setImageResource(R.drawable.red_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_red);
         } else if (item_color == app_amber_color) {
-            holder.cirlce.setImageResource(R.drawable.grey_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_amber);
         } else if (item_color == app_white_color) {
-            holder.cirlce.setImageResource(R.drawable.white_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_white);
         }
         convertView.setOnClickListener(new OnClickListener() {
             @Override

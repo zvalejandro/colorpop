@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.zaraos.colorpop.R;
-import com.zaraos.colorpop.model.PopInformer;
+import com.zaraos.colorpop.model.beans.PopInformer;
 import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.model.constants.POPAPI;
 import com.zaraos.colorpop.presenter.fragments.FragmentDetail;
@@ -21,7 +21,6 @@ public class ActivityDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.main_empty);
         initFragment();
     }
 
@@ -36,7 +35,6 @@ public class ActivityDetail extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)
-                //.replace(R.id.container, fragment)
                 .replace(android.R.id.content, fragment)
                 .commit();
     }

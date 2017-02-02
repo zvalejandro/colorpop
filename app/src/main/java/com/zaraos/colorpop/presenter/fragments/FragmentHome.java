@@ -15,7 +15,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.zaraos.colorpop.model.PopInformer;
+import com.zaraos.colorpop.model.beans.PopInformer;
 import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.model.constants.POPAPI;
 import com.zaraos.colorpop.presenter.activities.ActivityDetail;

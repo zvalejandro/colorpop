@@ -125,6 +125,14 @@ public class ToolbarUtilsView {
     }
 
     public void setHomeIndicatorBack(String title) {
+        setHomeIndicatorBackLight(title);
+    }
+
+    public void setHomeIndicatorBackLight(String title) {
+        setHomeIndicator(title, R.mipmap.ico_toolbar_back_white);
+    }
+
+    public void setHomeIndicatorBackDark(String title) {
         setHomeIndicator(title, R.mipmap.ico_toolbar_back_black);
     }
 

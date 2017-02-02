@@ -1,4 +1,4 @@
-package com.zaraos.colorpop.model;
+package com.zaraos.colorpop.model.beans;
 
 import android.os.Parcel;
 import android.os.Parcelable;

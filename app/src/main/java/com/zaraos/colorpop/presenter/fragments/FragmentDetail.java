@@ -61,7 +61,7 @@ public class FragmentDetail extends ColorPopFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar.setHomeIndicatorBack("Detalle");
+        toolbar.setHomeIndicatorBackDark("Detalle");
     }
 
     private Animation.AnimationListener onAnimationListener() {
