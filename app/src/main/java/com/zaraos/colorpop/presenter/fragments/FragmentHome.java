@@ -62,7 +62,6 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         gridView = (GridView) rootView.findViewById(R.id.list);
         fab = (FloatingActionButton) rootView.findViewById(R.id.floating_button);
-
         btn1 = (ImageButton) rootView.findViewById(R.id.btn_1);
         btn2 = (ImageView) rootView.findViewById(R.id.btn_2);
         btn1.setOnClickListener(btnOneClickListener());
@@ -88,6 +87,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
                 Intent intent = new Intent(getActivity(), ActivityDetail.class);
                 intent.putExtra(POPAPI.POP_INFORMER, new PopInformer(v));
                 getActivity().startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.activity_fade_in, 0);
             }
         };
     }
@@ -99,14 +99,14 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
                 Fragment fragment = FragmentDetail.newInstance(null);
 
                 BundlePopUtils.Builder.init(getActivity())
-                        .setCircleColor(ColorUtils.get(R.color.app_green))
-                        //.setPageColor(Color.WHITE)
+                        .setCircleColor(ColorUtils.get(R.color.app_blue))
+                        .setPageColor(Color.WHITE)
                         .setBaseView(new PopInformer(v), POPAPI.POP_MODE_CENTER)
                         .informFragment(fragment);
 
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)
-                        .replace(android.R.id.content, fragment)
+                        .add(android.R.id.content, fragment)
                         .commit();
             }
         };
@@ -119,6 +119,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
                 Intent intent = new Intent(getActivity(), ActivityDetail.class);
                 intent.putExtra(POPAPI.POP_INFORMER, new PopInformer(v));
                 getActivity().startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.activity_fade_in, 0);
             }
         };
     }
