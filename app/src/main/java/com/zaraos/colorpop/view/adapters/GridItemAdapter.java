@@ -81,14 +81,11 @@ public class GridItemAdapter extends BaseAdapter {
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isViewBehindStatusBar = false;
-                if (android.os.Build.VERSION.SDK_INT >= 19)
-                    isViewBehindStatusBar = true;
 
                 FragmentList fragment = FragmentList.newInstance(null);
                 BundlePopUtils.Builder.init(fragment_activity)
                         .setCircleColor(item_color)
-                        .setBaseView(holder.cirlce, POPAPI.POP_MODE_CENTER, isViewBehindStatusBar)
+                        .setBaseView(holder.cirlce, POPAPI.POP_MODE_CENTER)
                         .informColorPopPageFragment(fragment);
 
                 fragment_activity.getSupportFragmentManager().beginTransaction()
