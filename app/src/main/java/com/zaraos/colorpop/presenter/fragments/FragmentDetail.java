@@ -35,7 +35,7 @@ public class FragmentDetail extends ColorPopFragment {
     public View onCreateFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         if (android.os.Build.VERSION.SDK_INT >= 19) {
-            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(getContext()), 0, 0);
+            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(), 0, 0);
         }
 
         toolbar = new ToolbarUtilsView();

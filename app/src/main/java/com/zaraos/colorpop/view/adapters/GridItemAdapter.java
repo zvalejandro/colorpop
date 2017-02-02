@@ -86,7 +86,7 @@ public class GridItemAdapter extends BaseAdapter {
                 BundlePopUtils.Builder.init(fragment_activity)
                         .setCircleColor(item_color)
                         .setBaseView(holder.cirlce, POPAPI.POP_MODE_CENTER)
-                        .informColorPopPageFragment(fragment);
+                        .informFragment(fragment);
 
                 fragment_activity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)

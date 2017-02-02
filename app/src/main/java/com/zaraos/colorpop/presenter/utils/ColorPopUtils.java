@@ -1,24 +1,19 @@
 package com.zaraos.colorpop.presenter.utils;
 
-import android.content.Context;
+import com.zaraos.colorpop.Application;
 
 /**
  * Created by Alex on 25/01/17.
  */
 
 public class ColorPopUtils {
-    /**
-     *
-     * @param context
-     *
-     * @return status bar height pixels
-     */
-    public static int getStatusBarHeightPixels(Context context) {
+
+    public static int getStatusBarHeightPixels() {
         int status_bar_height = 0;
-        int resourceId = context.getResources().getIdentifier(
+        int resourceId = Application.getInstance().getResources().getIdentifier(
                 "status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            status_bar_height = context.getResources().getDimensionPixelSize(
+            status_bar_height = Application.getInstance().getResources().getDimensionPixelSize(
                     resourceId);
         }
         return status_bar_height;

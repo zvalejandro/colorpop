@@ -35,7 +35,7 @@ public class FragmentDoc extends ColorPopPageFragment {
         rootView = inflater.inflate(R.layout.fragment_doc, container, false);
         if (android.os.Build.VERSION.SDK_INT >= 19) {
             rootView.setBackgroundColor(ColorUtils.get(R.color.blue_grey_800));
-            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(getContext()), 0, 0);
+            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(), 0, 0);
         }
         return rootView;
     }

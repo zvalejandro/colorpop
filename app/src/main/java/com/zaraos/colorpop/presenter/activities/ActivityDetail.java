@@ -1,8 +1,10 @@
 package com.zaraos.colorpop.presenter.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.zaraos.colorpop.Application;
 import com.zaraos.colorpop.R;
@@ -21,24 +23,27 @@ public class ActivityDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Application.getInstance().getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 initFragment();
             }
-        }, 400);
+        }, 1000);
+
+        //initFragment();
     }
 
     private void initFragment() {
 
         Fragment fragment = FragmentDetail.newInstance(null);
-        PopInformer informer = getIntent().getExtras().getParcelable(POPAPI.POP_INFORMER);
+        PopInformer dimens = getIntent().getExtras().getParcelable(POPAPI.POP_INFORMER);
 
         BundlePopUtils.Builder.init(this)
-                .setCircleColor(ColorUtils.get(R.color.white))
+                .setCircleColor(ColorUtils.get(R.color.app_green))
                 //.setPageColor(Color.WHITE)
-                .setBaseView(informer, POPAPI.POP_MODE_CENTER)
-                .informColorPopPageFragment(fragment);
+                .setBaseView(dimens, POPAPI.POP_MODE_CENTER)
+                .informFragment(fragment);
 
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)

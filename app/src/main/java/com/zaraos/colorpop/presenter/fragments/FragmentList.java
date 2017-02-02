@@ -39,7 +39,7 @@ public class FragmentList extends ColorPopFragment implements AnimationListener 
                                      ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_list, container, false);
         if (android.os.Build.VERSION.SDK_INT >= 19)
-            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(getContext()), 0, 0);
+            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(), 0, 0);
 
         toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         list = (ListView) rootView.findViewById(R.id.list);
