@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zaraos.colorpop.model.constants.POPAPI;
+import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.presenter.fragments.FragmentList;
 import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
@@ -41,7 +41,7 @@ public class GridItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 100;
+        return 20;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class GridItemAdapter extends BaseAdapter {
                 FragmentList fragment = FragmentList.newInstance(null);
                 BundlePopUtils.Builder.init(fragment_activity)
                         .setCircleColor(item_color)
-                        .setBaseView(holder.cirlce, POPAPI.POP_MODE_CENTER)
+                        .setBaseView(holder.cirlce, MODE.CENTER)
                         .informFragment(fragment);
 
                 fragment_activity.getSupportFragmentManager().beginTransaction()

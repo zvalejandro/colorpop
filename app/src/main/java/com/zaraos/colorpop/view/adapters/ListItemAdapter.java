@@ -22,7 +22,7 @@ public class ListItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 50;
+        return 20;
     }
 
     @Override

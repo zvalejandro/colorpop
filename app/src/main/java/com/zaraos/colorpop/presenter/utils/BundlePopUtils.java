@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.zaraos.colorpop.model.PopInformer;
+import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.model.constants.POPAPI;
 
 /**
@@ -23,7 +24,7 @@ public class BundlePopUtils {
     private int startPointY = 0;
 
     public BundlePopUtils(Bundle arguments) {
-        PopInformer informer = arguments.getParcelable(POPAPI.POP_INFORMER);
+        PopInformer informer = arguments.getParcelable(POPAPI.BUNDLE_POP_INFORMER);
         if (informer != null) {
             if (informer.getCircleColor() != null) {
                 circleColor = informer.getCircleColor();
@@ -43,48 +44,29 @@ public class BundlePopUtils {
         }
     }
 
-    /**
-     * @return Int | the color of circle
-     */
     public int getCircleColor() {
         return circleColor;
     }
 
-    /**
-     * @return Int | the page color that grows from bottom
-     */
     public int getPageColor() {
         return rectColor;
     }
 
-    /**
-     * @return Boolean | is views behind status bar or not
-     */
     public boolean getIsBehindStatusbar() {
         return isBehindStatusBar;
     }
 
-    /**
-     * @return Int | start point x of circles animation
-     */
     public int getStartPointX() {
         return startPointX;
     }
 
-    /**
-     * @return Int | start point y of circles animation
-     */
     public int getStartPointY() {
         return startPointY;
     }
 
-    /**
-     * @return Int | height of status bar
-     */
     public int getStatusBarHeight() {
         return statusBarHeight;
     }
-
 
     public static class Builder {
 
@@ -112,7 +94,6 @@ public class BundlePopUtils {
         public Builder setPageColor(int color) {
             informer.setPageColor(color);
             return this;
-
         }
 
         /**
@@ -120,7 +101,7 @@ public class BundlePopUtils {
          *             the circles animation
          * @param mode determines the position of start point of animation on the base view
          */
-        public Builder setBaseView(View view, int mode) {
+        public Builder setBaseView(View view, MODE mode) {
             return setBaseView(new PopInformer(view), mode);
         }
 
@@ -129,7 +110,7 @@ public class BundlePopUtils {
          * used in API +19 </br> Note : if the start point of animation is not
          * correct then change this boolean and see if it's correct or not
          **/
-        public Builder setBaseView(final PopInformer dimens, int mode) {
+        public Builder setBaseView(final PopInformer dimens, MODE mode) {
             int startPointX = 0;
             int startPointY = 0;
             informer.setBehindStatusBar(android.os.Build.VERSION.SDK_INT >= 19);
@@ -138,11 +119,11 @@ public class BundlePopUtils {
             informer.setWindowLeft(dimens.getWindowLeft());
             informer.setWindowTop(dimens.getWindowTop());
 
-            if (mode == POPAPI.POP_MODE_LEFT_EDGE) {
+            if (mode == MODE.LEFT) {
                 startPointX = informer.getWindowLeft() + informer.getWidth() / 15;
-            } else if (mode == POPAPI.POP_MODE_CENTER) {
+            } else if (mode == MODE.CENTER) {
                 startPointX = informer.getWindowLeft() + (informer.getWidth() / 2);
-            } else if (mode == POPAPI.POP_MODE_RIGHT_EDGE) {
+            } else if (mode == MODE.RIGHT) {
                 startPointX = informer.getWindowLeft()
                         + (informer.getWidth() - (informer.getWidth() / 15));
             }
@@ -158,13 +139,13 @@ public class BundlePopUtils {
 
         public Builder informFragment(Fragment fragment) {
             Bundle arguments = new Bundle();
-            arguments.putParcelable(POPAPI.POP_INFORMER, informer);
+            arguments.putParcelable(POPAPI.BUNDLE_POP_INFORMER, informer);
             fragment.setArguments(arguments);
             return this;
         }
 
         public Builder informActivity(Intent intent) {
-            intent.putExtra(POPAPI.POP_INFORMER, informer);
+            intent.putExtra(POPAPI.BUNDLE_POP_INFORMER, informer);
             return this;
         }
     }

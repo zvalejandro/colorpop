@@ -6,10 +6,6 @@ package com.zaraos.colorpop.model.constants;
 
 public final class POPAPI {
 
-    public static final int POP_MODE_LEFT_EDGE = 0;
-    public static final int POP_MODE_CENTER = 1;
-    public static final int POP_MODE_RIGHT_EDGE = 2;
-
-    public static final String POP_INFORMER = "informer_view";
+    public static final String BUNDLE_POP_INFORMER = "informer_view";
 
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.model.PopInformer;
+import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.model.constants.POPAPI;
 import com.zaraos.colorpop.presenter.fragments.FragmentDetail;
 import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
@@ -26,11 +27,11 @@ public class ActivityDetail extends AppCompatActivity {
 
     private void initFragment() {
         Fragment fragment = FragmentDetail.newInstance(null);
-        PopInformer dimens = getIntent().getExtras().getParcelable(POPAPI.POP_INFORMER);
+        PopInformer dimens = getIntent().getExtras().getParcelable(POPAPI.BUNDLE_POP_INFORMER);
 
         BundlePopUtils.Builder.init(this)
                 .setCircleColor(ColorUtils.get(R.color.white))
-                .setBaseView(dimens, POPAPI.POP_MODE_CENTER)
+                .setBaseView(dimens, MODE.CENTER)
                 .informFragment(fragment);
 
         getSupportFragmentManager().beginTransaction()

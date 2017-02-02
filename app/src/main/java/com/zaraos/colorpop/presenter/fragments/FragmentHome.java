@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.zaraos.colorpop.model.PopInformer;
+import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.model.constants.POPAPI;
 import com.zaraos.colorpop.presenter.activities.ActivityDetail;
 import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
@@ -84,10 +85,17 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ActivityDetail.class);
-                intent.putExtra(POPAPI.POP_INFORMER, new PopInformer(v));
-                getActivity().startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.activity_fade_in, 0);
+                FragmentDoc fragment = FragmentDoc.newInstance(null);
+                BundlePopUtils.Builder.init(getActivity())
+                        .setCircleColor(ColorUtils.get(R.color.blue_grey_800))
+                        .setPageColor(Color.WHITE)
+                        .setBaseView(new PopInformer(v), MODE.CENTER)
+                        .informFragment(fragment);
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)
+                        .add(android.R.id.content, fragment)
+                        .commit();
             }
         };
     }
@@ -101,7 +109,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
                 BundlePopUtils.Builder.init(getActivity())
                         .setCircleColor(ColorUtils.get(R.color.app_blue))
                         .setPageColor(Color.WHITE)
-                        .setBaseView(new PopInformer(v), POPAPI.POP_MODE_CENTER)
+                        .setBaseView(new PopInformer(v), MODE.CENTER)
                         .informFragment(fragment);
 
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -117,7 +125,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityDetail.class);
-                intent.putExtra(POPAPI.POP_INFORMER, new PopInformer(v));
+                intent.putExtra(POPAPI.BUNDLE_POP_INFORMER, new PopInformer(v));
                 getActivity().startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.activity_fade_in, 0);
             }
@@ -130,7 +138,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         View toolbarView = toolbar.findViewById(arg0.getItemId());
 
         BundlePopUtils.Builder.init(getActivity())
-                .setBaseView(toolbarView, POPAPI.POP_MODE_CENTER)
+                .setBaseView(toolbarView, MODE.CENTER)
                 .informFragment(fragment);
 
         getActivity().getSupportFragmentManager().beginTransaction()
