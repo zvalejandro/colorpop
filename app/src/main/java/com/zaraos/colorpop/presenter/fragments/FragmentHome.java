@@ -20,7 +20,7 @@ import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.model.constants.POPAPI;
 import com.zaraos.colorpop.presenter.activities.ActivityDetail;
 import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
-import com.zaraos.colorpop.presenter.utils.ColorPopUtils;
+import com.zaraos.colorpop.presenter.utils.DimensUtils;
 import com.zaraos.colorpop.presenter.utils.ColorUtils;
 import com.zaraos.colorpop.view.adapters.GridItemAdapter;
 import com.zaraos.colorpop.R;
@@ -52,7 +52,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         if (android.os.Build.VERSION.SDK_INT >= 19) {
             rootView.setBackgroundColor(ColorUtils.get(R.color.blue_grey_800));
-            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(), 0, 0);
+            rootView.setPadding(0, DimensUtils.getStatusBarHeight(), 0, 0);
         }
 
         initResources();

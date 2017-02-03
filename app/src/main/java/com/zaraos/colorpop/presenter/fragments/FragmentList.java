@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.ListView;
 
-import com.zaraos.colorpop.presenter.utils.ColorPopUtils;
+import com.zaraos.colorpop.presenter.utils.DimensUtils;
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.view.adapters.ListItemAdapter;
 import com.zaraos.colorpop.model.abstracts.ColorPopFragment;
@@ -39,7 +39,7 @@ public class FragmentList extends ColorPopFragment implements AnimationListener 
                                      ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_list, container, false);
         if (android.os.Build.VERSION.SDK_INT >= 19)
-            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(), 0, 0);
+            rootView.setPadding(0, DimensUtils.getStatusBarHeight(), 0, 0);
 
         toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         list = (ListView) rootView.findViewById(R.id.list);

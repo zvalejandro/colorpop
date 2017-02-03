@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.zaraos.colorpop.presenter.utils.ColorPopUtils;
+import com.zaraos.colorpop.presenter.utils.DimensUtils;
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.model.abstracts.ColorPopPageFragment;
 import com.zaraos.colorpop.presenter.utils.ColorUtils;
@@ -35,7 +35,7 @@ public class FragmentDoc extends ColorPopPageFragment {
         rootView = inflater.inflate(R.layout.fragment_doc, container, false);
         if (android.os.Build.VERSION.SDK_INT >= 19) {
             rootView.setBackgroundColor(ColorUtils.get(R.color.blue_grey_800));
-            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(), 0, 0);
+            rootView.setPadding(0, DimensUtils.getStatusBarHeight(), 0, 0);
         }
         return rootView;
     }
