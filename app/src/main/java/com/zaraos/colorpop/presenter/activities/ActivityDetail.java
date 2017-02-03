@@ -39,4 +39,9 @@ public class ActivityDetail extends AppCompatActivity {
                 .commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, R.anim.activity_fade_out);
+    }
 }
