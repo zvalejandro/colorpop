@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zaraos.colorpop.model.constants.POPAPI;
+import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.R;
 import com.zaraos.colorpop.presenter.fragments.FragmentList;
 import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
@@ -41,7 +41,7 @@ public class GridItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 100;
+        return 20;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class GridItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = layout_inflater.inflate(R.layout.adapter_grid,
+            convertView = layout_inflater.inflate(R.layout.fragment_home_grid,
                     parent, false);
             ViewHolder holder = new ViewHolder();
             holder.cirlce = (ImageView) convertView.findViewById(R.id.circle);
@@ -68,28 +68,25 @@ public class GridItemAdapter extends BaseAdapter {
         final ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.title.setText("Grid Item " + (position + 1));
         if (item_color == app_green_color) {
-            holder.cirlce.setImageResource(R.drawable.green_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_green);
         } else if (item_color == app_blue_color) {
-            holder.cirlce.setImageResource(R.drawable.blue_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_blue);
         } else if (item_color == app_red_color) {
-            holder.cirlce.setImageResource(R.drawable.red_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_red);
         } else if (item_color == app_amber_color) {
-            holder.cirlce.setImageResource(R.drawable.grey_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_amber);
         } else if (item_color == app_white_color) {
-            holder.cirlce.setImageResource(R.drawable.white_circle);
+            holder.cirlce.setImageResource(R.drawable.shape_circle_white);
         }
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isViewBehindStatusBar = false;
-                if (android.os.Build.VERSION.SDK_INT >= 19)
-                    isViewBehindStatusBar = true;
 
                 FragmentList fragment = FragmentList.newInstance(null);
                 BundlePopUtils.Builder.init(fragment_activity)
                         .setCircleColor(item_color)
-                        .setBaseView(holder.cirlce, POPAPI.POP_MODE_CENTER, isViewBehindStatusBar)
-                        .informColorPopPageFragment(fragment);
+                        .setBaseView(holder.cirlce, MODE.CENTER)
+                        .informFragment(fragment);
 
                 fragment_activity.getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)

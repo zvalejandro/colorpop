@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.zaraos.colorpop.model.beans.PopInformer;
+import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.model.constants.POPAPI;
 
 /**
@@ -21,95 +23,68 @@ public class BundlePopUtils {
     private int startPointX = 0;
     private int startPointY = 0;
 
-
     public BundlePopUtils(Bundle arguments) {
-        if (arguments.containsKey(POPAPI.POP_CIRCLE_COLOR)) {
-            circleColor = arguments.getInt(POPAPI.POP_CIRCLE_COLOR);
-        }
-        if (arguments.containsKey(POPAPI.POP_POINT_X_)
-                && arguments.containsKey(POPAPI.POP_POINT_Y)) {
-            startPointX = arguments.getInt(POPAPI.POP_POINT_X_);
-            startPointY = arguments.getInt(POPAPI.POP_POINT_Y);
-        }
-        if (arguments.containsKey(POPAPI.POP_RECT_COLOR)) {
-            rectColor = arguments.getInt(POPAPI.POP_RECT_COLOR);
-        }
-        if (arguments.containsKey(POPAPI.POP_BEHIND_STATUSBAR)) {
-            isBehindStatusBar = arguments.getBoolean(POPAPI.POP_BEHIND_STATUSBAR);
-        }
-        if (arguments.containsKey(POPAPI.POP_STATUSBAR_HEIGHT)) {
-            statusBarHeight = arguments.getInt(POPAPI.POP_STATUSBAR_HEIGHT);
+        PopInformer informer = arguments.getParcelable(POPAPI.BUNDLE_POP_INFORMER);
+        if (informer != null) {
+            if (informer.getCircleColor() != null) {
+                circleColor = informer.getCircleColor();
+            }
+            if (informer.getStartPointX() != null && informer.getStartPointY() != null) {
+                startPointX = informer.getStartPointX();
+                startPointY = informer.getStartPointY();
+            }
+            if (informer.getPageColor() != null) {
+                rectColor = informer.getPageColor();
+            }
+            if (informer.getStatusBarHeight() != null) {
+                statusBarHeight = informer.getStatusBarHeight();
+            }
+
+            isBehindStatusBar = informer.isBehindStatusBar();
         }
     }
 
-    /**
-     * @return Int | the color of circle
-     */
     public int getCircleColor() {
         return circleColor;
     }
 
-    /**
-     * @return Int | the page color that grows from bottom
-     */
     public int getPageColor() {
         return rectColor;
     }
 
-    /**
-     * @return Boolean | is views behind status bar or not
-     */
     public boolean getIsBehindStatusbar() {
         return isBehindStatusBar;
     }
 
-    /**
-     * @return Int | start point x of circles animation
-     */
     public int getStartPointX() {
         return startPointX;
     }
 
-    /**
-     * @return Int | start point y of circles animation
-     */
     public int getStartPointY() {
         return startPointY;
     }
 
-    /**
-     * @return Int | height of status bar
-     */
     public int getStatusBarHeight() {
         return statusBarHeight;
     }
 
-
-
     public static class Builder {
 
-        private int circleColor;
-        private int pageColor;
-        private boolean isBehindStatusBar = false;
-        private int statusBarHeight = 0;
-        private int startPointX = 0;
-        private int startPointY = 0;
+        private PopInformer informer = new PopInformer();
 
         public Builder(Context context) {
-            statusBarHeight = ColorPopUtils.getStatusBarHeightPixels(context);
+            informer.setStatusBarHeight(ColorPopUtils.getStatusBarHeightPixels());
         }
 
         public static Builder init(Context context) {
-            Builder bundleInformerUtils = new Builder(context);
-            bundleInformerUtils.statusBarHeight = ColorPopUtils.getStatusBarHeightPixels(context);
-            return bundleInformerUtils;
+            return new Builder(context);
         }
 
         /**
          * @param color the color of circle animation
          */
         public Builder setCircleColor(int color) {
-            circleColor = color;
+            informer.setCircleColor(color);
             return this;
         }
 
@@ -117,110 +92,61 @@ public class BundlePopUtils {
          * @param color the color of the page that grows from bottom
          */
         public Builder setPageColor(int color) {
-            pageColor = color;
-            return this;
-
-        }
-
-        /**
-         * @param view                      the base view that is used for determining the start point of
-         *                                  the circles animation
-         * @param mode                      determines the position of start point of animation on the
-         *                                  base view </br> {@code FragmentInformer.POP_MODE_CENTER} </br>
-         *                                  {@code FragmentInformer.POP_MODE_LEFT_EDGE} </br>
-         *                                  {@code FragmentInformer.POP_MODE_RIGHT_EDGE}
-         * @param isBehindStatusBar if your view's are behind status bar set this to true used in
-         *                                  API +19 </br> Note : if the start point of animation is not
-         *                                  correct then change this boolean and see if it's correct or
-         *                                  not
-         */
-        public Builder setBaseView(final View view, int mode,
-                                   boolean isBehindStatusBar) {
-            this.isBehindStatusBar = isBehindStatusBar;
-            int width = view.getWidth();
-            int height = view.getHeight();
-            int[] layout_location = {0, 0};
-            view.getLocationOnScreen(layout_location);
-            if (mode == POPAPI.POP_MODE_LEFT_EDGE) {
-                startPointX = layout_location[0] + width / 15;
-            } else if (mode == POPAPI.POP_MODE_CENTER) {
-                startPointX = layout_location[0] + (width / 2);
-            } else if (mode == POPAPI.POP_MODE_RIGHT_EDGE) {
-                startPointX = layout_location[0] + (width - (width / 15));
-            }
-            startPointY = layout_location[1] + (height / 2);
-            if (!this.isBehindStatusBar) {
-                startPointY -= statusBarHeight;
-            }
+            informer.setPageColor(color);
             return this;
         }
 
         /**
-         * @param fragment it will give the fragment these informations </br> #1 Int |
-         *                 start point of the animation
+         * @param view the base view that is used for determining the start point of
+         *             the circles animation
+         * @param mode determines the position of start point of animation on the base view
          */
+        public Builder setBaseView(View view, MODE mode) {
+            return setBaseView(new PopInformer(view), mode);
+        }
+
+        /**
+         * isBehindStatusBar if your view's are behind status bar set this to true
+         * used in API +19 </br> Note : if the start point of animation is not
+         * correct then change this boolean and see if it's correct or not
+         **/
+        public Builder setBaseView(final PopInformer dimens, MODE mode) {
+            int startPointX = 0;
+            int startPointY = 0;
+            informer.setBehindStatusBar(android.os.Build.VERSION.SDK_INT >= 19);
+            informer.setWidth(dimens.getWidth());
+            informer.setHeight(dimens.getHeight());
+            informer.setWindowLeft(dimens.getWindowLeft());
+            informer.setWindowTop(dimens.getWindowTop());
+
+            if (mode == MODE.LEFT) {
+                startPointX = informer.getWindowLeft() + informer.getWidth() / 15;
+            } else if (mode == MODE.CENTER) {
+                startPointX = informer.getWindowLeft() + (informer.getWidth() / 2);
+            } else if (mode == MODE.RIGHT) {
+                startPointX = informer.getWindowLeft()
+                        + (informer.getWidth() - (informer.getWidth() / 15));
+            }
+            startPointY = informer.getWindowTop() + (informer.getHeight() / 2);
+            if (!informer.isBehindStatusBar())
+                startPointY -= informer.getStatusBarHeight();
+
+            informer.setStartPointX(startPointX);
+            informer.setStartPointY(startPointY);
+
+            return this;
+        }
+
         public Builder informFragment(Fragment fragment) {
             Bundle arguments = new Bundle();
-            arguments.putInt(POPAPI.POP_POINT_X_, startPointX);
-            arguments.putInt(POPAPI.POP_POINT_Y, startPointY);
+            arguments.putParcelable(POPAPI.BUNDLE_POP_INFORMER, informer);
             fragment.setArguments(arguments);
             return this;
         }
 
         public Builder informActivity(Intent intent) {
-            intent.putExtra(POPAPI.POP_POINT_X_, startPointX);
-            intent.putExtra(POPAPI.POP_POINT_Y, startPointY);
+            intent.putExtra(POPAPI.BUNDLE_POP_INFORMER, informer);
             return this;
         }
-
-        /**
-         * @param fragment it will give the fragment these informations </br> #1 Int |
-         *                 the circles color </br> #2 Int | start point of the animation
-         */
-        public Builder informColorPopFragment(Fragment fragment) {
-            Bundle arguments = new Bundle();
-            arguments.putInt(POPAPI.POP_CIRCLE_COLOR, circleColor);
-            arguments.putInt(POPAPI.POP_POINT_X_, startPointX);
-            arguments.putInt(POPAPI.POP_POINT_Y, startPointY);
-            fragment.setArguments(arguments);
-            return this;
-        }
-
-        public Builder informColorPopIntent(Intent intent) {
-            intent.putExtra(POPAPI.POP_CIRCLE_COLOR, circleColor);
-            intent.putExtra(POPAPI.POP_POINT_X_, startPointX);
-            intent.putExtra(POPAPI.POP_POINT_Y, startPointY);
-            return this;
-        }
-
-        /**
-         * @param fragment it will give the fragment these informations </br>
-         *                 <p>
-         *                 #1 Int | the circles color </br> #2 Int | the page color </br>
-         *                 #3 Int | start point of the animation </br> #4 Boolean | is
-         *                 views behind status bar or not </br>
-         */
-        public Builder informColorPopPageFragment(Fragment fragment) {
-            Bundle arguments = new Bundle();
-            arguments.putInt(POPAPI.POP_CIRCLE_COLOR, circleColor);
-            arguments.putInt(POPAPI.POP_RECT_COLOR, pageColor);
-            arguments.putInt(POPAPI.POP_POINT_X_, startPointX);
-            arguments.putInt(POPAPI.POP_POINT_Y, startPointY);
-            arguments.putBoolean(POPAPI.POP_BEHIND_STATUSBAR, isBehindStatusBar);
-            arguments.putInt(POPAPI.POP_STATUSBAR_HEIGHT, statusBarHeight);
-            fragment.setArguments(arguments);
-            return this;
-        }
-
-        public Builder informColorPopPageActivity(Intent intent) {
-            intent.putExtra(POPAPI.POP_CIRCLE_COLOR, circleColor);
-            intent.putExtra(POPAPI.POP_RECT_COLOR, pageColor);
-            intent.putExtra(POPAPI.POP_POINT_X_, startPointX);
-            intent.putExtra(POPAPI.POP_POINT_Y, startPointY);
-            intent.putExtra(POPAPI.POP_BEHIND_STATUSBAR, isBehindStatusBar);
-            intent.putExtra(POPAPI.POP_STATUSBAR_HEIGHT, statusBarHeight);
-            return this;
-        }
-
     }
 }

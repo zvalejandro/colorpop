@@ -10,7 +10,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:src="@drawable/blue_circle" />
+        android:src="@drawable/shape_circle_blue" />
 
     <TextView
         android:id="@+id/title"

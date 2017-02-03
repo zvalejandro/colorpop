@@ -1,6 +1,7 @@
 package com.zaraos.colorpop.presenter.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import com.zaraos.colorpop.model.beans.PopInformer;
+import com.zaraos.colorpop.model.constants.MODE;
 import com.zaraos.colorpop.model.constants.POPAPI;
 import com.zaraos.colorpop.presenter.activities.ActivityDetail;
 import com.zaraos.colorpop.presenter.utils.BundlePopUtils;
@@ -38,6 +43,8 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
     private GridView gridView;
     private FloatingActionButton fab;
     private GridItemAdapter adapter;
+    private ImageButton btn1;
+    private ImageView btn2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +52,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         if (android.os.Build.VERSION.SDK_INT >= 19) {
             rootView.setBackgroundColor(ColorUtils.get(R.color.blue_grey_800));
-            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(getContext()), 0, 0);
+            rootView.setPadding(0, ColorPopUtils.getStatusBarHeightPixels(), 0, 0);
         }
 
         initResources();
@@ -56,6 +63,10 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         gridView = (GridView) rootView.findViewById(R.id.list);
         fab = (FloatingActionButton) rootView.findViewById(R.id.floating_button);
+        btn1 = (ImageButton) rootView.findViewById(R.id.btn_1);
+        btn2 = (ImageView) rootView.findViewById(R.id.btn_2);
+        btn1.setOnClickListener(btnOneClickListener());
+        btn2.setOnClickListener(btnTwoClickListener());
     }
 
     @Override
@@ -74,20 +85,49 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         return new OnClickListener() {
             @Override
             public void onClick(View v) {
-                
-                boolean isViewBehindStatusBar = false;
-                if (android.os.Build.VERSION.SDK_INT >= 19)
-                    isViewBehindStatusBar = true;
-
-                Intent intent = new Intent(getActivity(), ActivityDetail.class);
+                FragmentDoc fragment = FragmentDoc.newInstance(null);
                 BundlePopUtils.Builder.init(getActivity())
-                        .setCircleColor(ColorUtils.get(R.color.white))
-                        //.setPageColor(Color.WHITE)
-                        .setBaseView(v, POPAPI.POP_MODE_CENTER, isViewBehindStatusBar)
-                        .informColorPopPageActivity(intent);
+                        .setCircleColor(ColorUtils.get(R.color.blue_grey_800))
+                        .setPageColor(Color.WHITE)
+                        .setBaseView(new PopInformer(v), MODE.CENTER)
+                        .informFragment(fragment);
 
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)
+                        .add(android.R.id.content, fragment)
+                        .commit();
+            }
+        };
+    }
+
+    private OnClickListener btnOneClickListener(){
+        return new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = FragmentDetail.newInstance(null);
+
+                BundlePopUtils.Builder.init(getActivity())
+                        .setCircleColor(ColorUtils.get(R.color.app_blue))
+                        .setPageColor(Color.WHITE)
+                        .setBaseView(new PopInformer(v), MODE.CENTER)
+                        .informFragment(fragment);
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(0, R.anim.popup_exit, 0, R.anim.popup_exit)
+                        .add(android.R.id.content, fragment)
+                        .commit();
+            }
+        };
+    }
+
+    private OnClickListener btnTwoClickListener(){
+        return new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivityDetail.class);
+                intent.putExtra(POPAPI.BUNDLE_POP_INFORMER, new PopInformer(v));
                 getActivity().startActivity(intent);
-
+                getActivity().overridePendingTransition(R.anim.activity_fade_in, 0);
             }
         };
     }
@@ -98,7 +138,7 @@ public class FragmentHome extends Fragment implements Toolbar.OnMenuItemClickLis
         View toolbarView = toolbar.findViewById(arg0.getItemId());
 
         BundlePopUtils.Builder.init(getActivity())
-                .setBaseView(toolbarView, POPAPI.POP_MODE_CENTER, false)
+                .setBaseView(toolbarView, MODE.CENTER)
                 .informFragment(fragment);
 
         getActivity().getSupportFragmentManager().beginTransaction()
