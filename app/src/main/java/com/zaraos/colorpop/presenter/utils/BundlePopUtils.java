@@ -73,7 +73,7 @@ public class BundlePopUtils {
         private PopInformer informer = new PopInformer();
 
         public Builder(Context context) {
-            informer.setStatusBarHeight(ColorPopUtils.getStatusBarHeightPixels());
+            informer.setStatusBarHeight(DimensUtils.getStatusBarHeight());
         }
 
         public static Builder init(Context context) {
