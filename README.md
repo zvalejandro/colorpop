@@ -11,9 +11,9 @@ This sample is about effects nine old android with start a new activity
 
 ## Authors
 
-| Name | Description | Bitbucket | Github | Twitter |
-| ------ | ------ | ------ | ------ | ------ |
-| Alejandro Zaraos | initial work |[zvalejandro] [Albz] |[zvalejandro] [Algz] |[AlejandroZaraos] [Alta] |
+| Name | Description | LinkedIn | Twitter | Bitbucket | Github |
+| ------ | ------ | ------ | ------ | ------ | ------ |
+| Alejandro Zaraos | initial work |[alejandrozvj] [Alla]|[alejandrozaraos] [Alta]|[zvalejandro] [Albz]|[zvalejandro] [Algz]|
 
 
 
@@ -42,6 +42,7 @@ If you have any new idea about this project, feel free to [contact me](mailto:zv
     See the License for the specific language governing permissions and
     limitations under the License.
 
+   [Alla]: <https://www.linkedin.com/in/alejandrozvj/>
    [Albz]: <https://bitbucket.org/zvalejandro/>
    [Algz]: <https://github.com/zvalejandro>
    [Alta]: <https://twitter.com/AlejandroZaraos>
